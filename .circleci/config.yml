@@ -124,8 +124,6 @@ workflows:
           dockerfile: ~/project/demo_app/Dockerfile
           path: ~/project/demo_app
           tag: ${CIRCLE_SHA1}
-          steps:
-            - run: python -V
           # Uncomment if the repository does not yet exist
           # create-repo: true
       - aws-eks/create-cluster:
