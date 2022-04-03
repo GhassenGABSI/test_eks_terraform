@@ -8,7 +8,6 @@ orbs:
 jobs:
   deploy-application:
     executor: aws-eks/python3
-    
     parameters:
       cluster-name:
         description: |
@@ -121,9 +120,9 @@ workflows:
           name: build-and-push-image
           account-url: AWS_ECR_URL
           region: AWS_DEFAULT_REGION
-          repo: eks_orb_test_app
-          dockerfile: ~/project/test_app/Dockerfile
-          path: ~/project/test_app
+          repo: eks_orb_demo_app
+          dockerfile: ~/project/demo_app/Dockerfile
+          path: ~/project/demo_app
           tag: ${CIRCLE_SHA1}
           # Uncomment if the repository does not yet exist
           # create-repo: true
@@ -135,7 +134,7 @@ workflows:
       - deploy-application:
           cluster-name: eks-orb-demo-app-deployment
           aws-region: $AWS_DEFAULT_REGION
-          docker-image-name: "${AWS_ECR_URL}/test:${CIRCLE_SHA1}"
+          docker-image-name: "${AWS_ECR_URL}/eks_orb_demo_app:${CIRCLE_SHA1}"
           version-info: "${CIRCLE_SHA1}"
           requires:
             - aws-eks/create-cluster
