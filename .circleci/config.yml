@@ -7,7 +7,7 @@ orbs:
 
 jobs:
   deploy-application:
-    executor: aws-eks/python
+    executor: aws-eks/python3
     parameters:
       cluster-name:
         description: |
@@ -50,7 +50,7 @@ jobs:
       - kubernetes/create-or-update-resource:
           resource-file-path: "deployment/demo-app-service.yaml"
   test-application:
-    executor: aws-eks/python
+    executor: aws-eks/python3
     parameters:
       cluster-name:
         description: |
@@ -89,7 +89,7 @@ jobs:
             sleep 180
             curl -s --retry 10 "http://$EXTERNAL_IP" | grep "<< parameters.expected-version-info >>"
   undeploy-application:
-    executor: aws-eks/python
+    executor: aws-eks/python3
     parameters:
       cluster-name:
         description: |
